@@ -28,21 +28,124 @@ Text版本用于小字号（20pt以下）的显示，而Display版本
 }
 html {
   font-family: "SanFranciscoMin", "微软雅黑";
-  font-size: 14px;
+  font-size: 100px;
   color: white;
   text-shadow: 0 0 5px #000000;
   text-align: center;
 }
+body {
+  font-size: 0.14rem;
+}
 header {
-  background-color: #cccccc;
   height: 500px;
 }
 header nav {
-  height: 50px;
+  height: 80px;
   box-shadow: 0 0 2px #333333 inset;
 }
+header nav section {
+  height: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+header nav section article {
+  height: 100%;
+  box-sizing: border-box;
+}
+header nav section .index-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+header nav section .index-nav ul {
+  display: flex;
+  height: 100%;
+}
+header nav section .index-nav ul li {
+  list-style-type: none;
+  margin: 0.05rem;
+  width: auto;
+  padding: 0 5px;
+}
+header nav section .index-nav ul li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  line-height: .8rem;
+  transition: all .5s;
+  color: rgba(0, 0, 0, 0.7);
+  text-decoration: none;
+  text-shadow: none;
+  padding: 0 5px;
+}
+header nav section .index-nav ul li a:hover {
+  border-bottom: 2px solid #04b4dc;
+}
+header nav section .index-nav {
+  flex-grow: 5;
+}
+header nav section .line {
+  flex-grow: 3;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+header nav section .line hr {
+  background-color: #04b4dc;
+  height: 2px;
+  width: 100%;
+  box-shadow: 0 0 2px #04b4dc;
+}
+header nav section .logo {
+  width: 2rem;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-basis: border-box;
+}
+header nav section .logo div {
+  display: flex;
+}
+header nav section .logo div img {
+  height: .4rem;
+  width: 0.8rem;
+}
+header nav section .logo div h2 {
+  font-size: 24px;
+  line-height: .4rem;
+  white-space: nowrap;
+}
+header nav section .menu-btn {
+  visibility: hidden;
+  flex-grow: .5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+header nav section .menu-btn a {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: .4rem;
+  height: .25rem;
+  border: 2px solid #04b4dc;
+  border-radius: 8px;
+  padding: .02rem .02rem;
+  transition: padding 1s;
+}
+header nav section .menu-btn a span {
+  display: block;
+  border-bottom: 2px solid #04b4dc;
+  opacity: .5;
+  transition: padding 1s;
+}
+header nav section .menu-btn a:hover span {
+  opacity: 1;
+}
 header div.banner {
-  height: 450px;
+  height: 420px;
   background: #333333;
 }
 .container {
@@ -86,7 +189,83 @@ header div.banner {
 .hot {
   height: auto;
   padding-bottom: 400px;
+  /*轮播*/
+  /*按钮控制器*/
   /**图文介绍**/
+}
+.hot > .banner {
+  height: auto;
+  position: relative;
+  box-shadow: none;
+}
+.hot section.img-container {
+  height: 300px;
+  width: auto;
+  margin: 0 auto;
+  position: relative;
+  box-sizing: content-box;
+}
+.hot section.img-container > article {
+  font-family: testfont;
+  width: 200px;
+  height: 100%;
+  box-shadow: 0 0 5px seagreen;
+  line-height: 300px;
+  text-align: center;
+  font-size: 50px;
+  float: left;
+  background: white;
+  position: absolute;
+  transition: all .5s;
+}
+.hot .banner-struck {
+  height: auto;
+  position: relative;
+  margin: 0 auto;
+}
+.hot .left-img {
+  left: 40px;
+}
+.hot .center-img {
+  left: 200px;
+  z-index: 1;
+  box-shadow: 0 0 15px 2px #333333;
+}
+.hot .right-img {
+  left: 360px;
+}
+.hot .left-img,
+.hot .right-img {
+  transform: scale(0.8);
+  opacity: .7;
+}
+.hot .action {
+  position: absolute;
+  width: 600px;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  opacity: .2;
+  bottom: 0;
+  transition: opacity .5s;
+}
+.hot .action:hover {
+  opacity: 1;
+}
+.hot .action-right,
+.hot .action-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px;
+  width: 50%;
+  text-align: left;
+}
+.hot .action-right {
+  text-align: right;
 }
 .hot .banner_mesage h2 {
   font-size: 30px;
@@ -194,10 +373,135 @@ header div.banner {
   box-shadow: 0 0 5px 2px #04b4dc, 0 0 6px rgba(0, 0, 0, 0.1), 0 0 7px rgba(0, 0, 0, 0.05), 0 0 8px rgba(0, 0, 0, 0.01);
 }
 footer {
-  background-color: #cccccc;
   height: 300px;
+  /**平时的联系方式**/
+}
+footer section {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+footer .conn {
+  padding: .5rem 0;
+}
+footer .sos-conn {
+  display: flex;
+  flex-direction: column;
+}
+footer .sos-conn div {
+  display: flex;
+}
+footer .sos-conn div img {
+  overflow: hidden;
+  border-radius: 50%;
+  width: .4rem;
+  height: .4rem;
+  border: 1px solid #cccccc;
+  margin: 5px;
+}
+footer .sos-conn div aside {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+footer .sos-conn div aside strong,
+footer .sos-conn div aside span {
+  width: 100%;
+  text-align: left;
+  margin: 5px;
+}
+footer .web-conn {
+  display: flex;
+}
+footer .web-conn div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+footer .web-conn div fieldset a {
+  display: inline-block;
+  border: 1px solid #cccccc;
+  border-radius: 50%;
+  width: .3rem;
+  height: .3rem;
+  overflow: hidden;
+}
+footer .web-conn div fieldset a:nth-child(3) {
+  margin: 0 .05rem;
+}
+footer .web-conn div.ewm {
+  display: flex;
+  flex-direction: row;
+}
+footer .web-conn div.ewm img {
+  width: 1.5rem;
+  height: 1.5rem;
+  overflow: hidden;
+  margin: 0.15rem;
+  box-shadow: 0 0 5px #333333;
+}
+footer .web-conn div.ewm img:last-child {
+  margin-right: .5rem;
+}
+footer .web-conn div.ewm img:first-child {
+  margin-left: .5rem;
+}
+footer .web-conn div:last-child {
+  justify-content: space-around;
+}
+footer .web-conn div:last-child fieldset {
+  border-radius: 4px;
+  width: 2rem;
+  padding: .05rem;
+}
+footer .web-conn div:last-child fieldset legend {
+  padding: .02rem;
+}
+footer .web-conn div:last-child fieldset span {
+  font-size: 24px;
+}
+footer .copyright {
+  background-color: rgba(0, 0, 0, 0.9);
+  padding: .25rem;
 }
 @media screen and (max-width: 768px) {
+  header article.line {
+    visibility: hidden;
+    width: 0;
+    height: 0;
+  }
+  header nav {
+    position: relative;
+  }
+  header nav section .line {
+    flex-grow: 0;
+  }
+  header nav section .menu-btn {
+    visibility: visible;
+  }
+  header nav section .index-nav ul {
+    overflow: visible;
+    width: 100%;
+    height: auto;
+    position: absolute;
+    flex-direction: column;
+    z-index: 999;
+    top: 80px;
+    left: 0;
+  }
+  header nav section .index-nav ul li {
+    background: dodgerblue;
+    border-radius: 8px;
+    margin: 1px;
+    box-shadow: 2px 2px 4px #333333;
+  }
+  header nav section .index-nav ul li a {
+    color: white;
+    font-size: 24px;
+  }
+  header nav section .index-nav ul li:hover {
+    background-color: rgba(4, 180, 220, 0.7);
+  }
   .container {
     padding: 15px 1px;
   }
@@ -210,6 +514,28 @@ footer {
   }
   .news li .news_content .news_content_message {
     text-indent: 0;
+  }
+  footer .conn {
+    padding: 0 0 .15rem 0;
+  }
+  footer section,
+  footer .web-conn,
+  footer .sos-conn {
+    flex-direction: column;
+  }
+  footer .sos-conn div {
+    display: inline-block;
+  }
+  footer .sos-conn div img {
+    margin: 0 auto;
+  }
+  footer .sos-conn div aside span,
+  footer .sos-conn div aside strong {
+    text-align: center;
+  }
+  footer .web-conn div:last-child fieldset {
+    width: 75%;
+    margin: 0 auto;
   }
 }
 /*# sourceMappingURL=index.css.map */

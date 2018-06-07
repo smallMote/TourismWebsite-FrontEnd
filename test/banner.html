@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>轮播</title>
+    <style type="text/css">
+        *{
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+        body{
+            background: #cccccc;
+        }
+        @font-face {
+            font-family: testfont;
+            src: url("../font/HARRYP-1.ttf");
+        }
+        section.img-container{
+            border:1px solid red;
+            height: 300px;
+            width: auto;
+            margin: 0 auto;
+            position: relative;
+        }
+        section.img-container>article{
+            font-family: testfont;
+            width: 200px;
+            height: 100%;
+            box-shadow: 0 0 5px seagreen;
+            line-height: 300px;
+            text-align: center;
+            font-size: 50px;
+            float: left;
+            background: white;
+            position: absolute;
+            transition: all .5s;
+        }
+        .banner{
+            margin: 0 auto;
+            border: 1px solid seagreen;
+            box-shadow: 0 0 15px rgba(0,0,0,.5);
+        }
+        .left-img{
+            left: 40px;
+        }
+        .center-img{
+            left: 200px;
+            z-index: 1;
+            box-shadow: 0 0 15px 2px #333333;
+        }
+        .right-img{
+            left: 360px;
+        }
+        .left-img,.right-img{
+            transform: scale(.8);
+        }
+        /*按钮控制器*/
+        .action-right,.action-left{
+            padding: 5px;
+            background: seagreen;
+            border-radius: 4px;
+            cursor: pointer;
+            display: inline-block;
+            margin: 5px;
+            width: 50px;
+        }
+    </style>
+    <script src="../js/jquery/jquery-3.2.1.js"></script>
+</head>
+<body>
+    <div class="banner">
+        <section class="img-container">
+            <article class="left-img">1</article>
+            <article class="center-img">2</article>
+            <article class="right-img">3</article>
+            <!--<article>4</article>-->
+            <!--<article>5</article>-->
+        </section>
+    </div>
+    <div class="action">
+        <span class="action-left">Prev</span>
+        <span class="action-right">Next</span>
+    </div>
+    <script>
+        $(function () {
+
+            /**
+             * banner类
+             * @type {{bean, action}}
+             * bean : 存放成员变量以及基本属性
+             */
+            const class_banner = (function () {
+                let domNode = init();
+                return {
+                    bean : {
+                        domNode : domNode,
+                        proprty : domNode.proprty,
+                    },
+                    action : {
+                        nextImg : next,
+                        prevImg : prev,
+                    }
+                }
+            })();
+
+            /**执行轮播动画**/
+            class_banner.action.nextImg();
+            class_banner.action.prevImg();
+
+            //初始化变量
+            function init(){
+                //为了保证class_banner为最上文，使用开放式的function+闭包
+                return  (function () {
+                    let $imgContainer = $('.img-container');
+                    let $img = $imgContainer.find('*');
+                    let $banner = $('.banner');
+                    let $actionLeft = $('.action-left');
+                    let $actionRight = $('.action-right');
+                    let imgWidth = $img.width();
+                    let animateTime = $img.css('transition-duration');//动画时间
+                    animateTime = parseInt(animateTime) * 1000;//图片动画时间转换成ms
+                    $imgContainer.width($img.length * imgWidth);//设置图片容器的容器宽度，有图片数量和本省的宽度决定
+                    $banner.width($img.width() * 3);//设置显示图片容器的宽度
+                    return {
+                        $imgContainer : $imgContainer,
+                        $img : $img,
+                        $banner : $banner,
+                        $actionLeft : $actionLeft,
+                        $actionRight : $actionRight,
+                        proprty : {
+                            imgWidth : imgWidth,
+                            animateTime : animateTime
+                        }
+                    }
+                })();
+            }
+            //下一张 封装
+            function next(){
+                let $actionRight = class_banner.bean.domNode.$actionRight;
+                let actionTime = class_banner.bean.proprty.animateTime;//保证动画与重新布局保持一致
+                $actionRight.click(function () {
+                    let $img = class_banner.bean.domNode.$imgContainer.find('*');//重新查找图片节点
+                    let imgWidth = class_banner.bean.proprty.imgWidth;
+                    let $img_last = $img.last().clone(true);
+                    $img_last.removeClass('right-img').addClass('left-img');
+                    $img_last.insertBefore($img.first());
+                    $img_last.css({left : 40});//重新定位第一张图片的位置
+                    $.each($img,function (index , value) {
+                        value = $(value);
+                        //变换
+                        if (value.hasClass('center-img')){
+                            value.removeClass('center-img').addClass('right-img');
+                        }else if(value.hasClass('left-img')){
+                            value.removeClass('left-img').addClass('center-img');
+                        }
+                        //移动
+                        value.css({left : parseFloat(value.css('left')) + imgWidth - 40});
+                    });
+                    //消灭最后一个元素
+                    $img.last().css({'transform' : 'scale(.5)',opacity : 0});
+                    setTimeout(function () {
+                        $img.last().remove();
+                    },actionTime);
+                });
+            }
+
+            //上一张 封装
+            function prev(){
+                let $actionLeft = class_banner.bean.domNode.$actionLeft;
+                let actionTime = class_banner.bean.proprty.animateTime;//保证动画与重新布局保持一致
+                $actionLeft.click(function () {
+                    let $img = class_banner.bean.domNode.$imgContainer.find('*');
+                    let imgWidth = class_banner.bean.proprty.imgWidth;
+                    let $img_first = $img.first().clone(true);
+                    $img_first.removeClass('left-img').addClass('right-img');
+                    $img_first.insertAfter($img.last());
+                    $img_first.css({left : 360});//重新定位第一张图片的位置
+                    $.each($img,function (index , value) {
+                        value = $(value);
+                        //变换
+                        if (value.hasClass('center-img')){
+                            value.removeClass('center-img').addClass('left-img');
+                        }else if(value.hasClass('right-img')){
+                            value.removeClass('right-img').addClass('center-img');
+                        }
+                        //移动
+                        value.css({left : parseFloat(value.css('left')) - imgWidth + 40});
+                    });
+                    //消灭最后一个元素
+                    $img.first().css({transform : 'scale(.5)',opacity : 0});
+                    setTimeout(function () {
+                        $img.first().remove();
+                    },actionTime);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
