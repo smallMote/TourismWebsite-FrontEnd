@@ -143,20 +143,70 @@ header{
             transition: padding 1s;
           }
         }
-        //a:hover{
-        //  padding: .02rem 0;
-        //}
         a:hover span{
         opacity: 1;
       }
       }
     }
   }
-  div.banner{
+  //第一个大轮播
+  .banner-header{
+    *{box-sizing: border-box}
     height: @this_height - @nav_height;
     background: #333333;
+    box-sizing: border-box;
+    position: relative;
+    .container{
+      height: 100%;
+      position: relative;
+      article{
+        position: absolute;
+        font-size: 100px;
+        text-align: center;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: lightseagreen;
+        opacity: .7;
+        img{
+          width: 100%;
+          overflow: hidden;
+        }
+      }
+      article:hover{
+        opacity: 1;
+      }
+    }
+    //指示控制器
+    @spanWidth:.2rem;
+    @spanMarginLeft:.25rem;
+    .action{
+      position: absolute;
+      bottom: 5%;
+      width: 100%;
+      span{
+        display: inline-block;
+        width: @spanWidth;
+        height: @spanWidth;
+        -webkit-border-radius: 50%;
+        -moz-border-radius: 50%;
+        border-radius: 50%;
+        margin-left: @spanMarginLeft;
+        transition: background-color 1s;
+        border: 1px solid white;
+      }
+      span:first-child{
+        margin-left: 0;
+      }
+      span:hover{
+        background: white;
+        cursor: pointer;
+      }
+    }
   }
 }
+/*设置所有板块的基本样式*/
 .container{
   height: 400px;
   padding: 50px;

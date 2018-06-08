@@ -144,10 +144,61 @@ header nav section .menu-btn a span {
 header nav section .menu-btn a:hover span {
   opacity: 1;
 }
-header div.banner {
+header .banner-header {
   height: 420px;
   background: #333333;
+  box-sizing: border-box;
+  position: relative;
 }
+header .banner-header * {
+  box-sizing: border-box;
+}
+header .banner-header .container {
+  height: 100%;
+  position: relative;
+}
+header .banner-header .container article {
+  position: absolute;
+  font-size: 100px;
+  text-align: center;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: lightseagreen;
+  opacity: .7;
+}
+header .banner-header .container article img {
+  width: 100%;
+  overflow: hidden;
+}
+header .banner-header .container article:hover {
+  opacity: 1;
+}
+header .banner-header .action {
+  position: absolute;
+  bottom: 5%;
+  width: 100%;
+}
+header .banner-header .action span {
+  display: inline-block;
+  width: 0.2rem;
+  height: 0.2rem;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
+  border-radius: 50%;
+  margin-left: 0.25rem;
+  transition: background-color 1s;
+  border: 1px solid white;
+}
+header .banner-header .action span:first-child {
+  margin-left: 0;
+}
+header .banner-header .action span:hover {
+  background: white;
+  cursor: pointer;
+}
+/*设置所有板块的基本样式*/
 .container {
   height: 400px;
   padding: 50px;
