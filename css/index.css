@@ -165,12 +165,11 @@ header .banner-header .container article {
   left: 0;
   width: 100%;
   height: 100%;
-  background: lightseagreen;
-  opacity: .7;
+  opacity: 1;
+  overflow: hidden;
 }
 header .banner-header .container article img {
   width: 100%;
-  overflow: hidden;
 }
 header .banner-header .container article:hover {
   opacity: 1;
@@ -256,39 +255,22 @@ header .banner-header .action span:hover {
   position: relative;
   box-sizing: content-box;
 }
-.hot section.img-container > article {
-  font-family: testfont;
-  width: 200px;
-  height: 100%;
-  box-shadow: 0 0 5px seagreen;
-  line-height: 300px;
-  text-align: center;
-  font-size: 50px;
-  float: left;
-  background: white;
-  position: absolute;
-  transition: all .5s;
-}
 .hot .banner-struck {
   height: auto;
   position: relative;
   margin: 0 auto;
 }
-.hot .left-img {
-  left: 40px;
+.hot #wlittleyang-banner {
+  width: 600px;
 }
-.hot .center-img {
-  left: 200px;
-  z-index: 1;
-  box-shadow: 0 0 15px 2px #333333;
+.hot #wlittleyang-banner section.img-container {
+  border: none;
 }
-.hot .right-img {
-  left: 360px;
+.hot #wlittleyang-banner section.img-container article {
+  width: 200px;
 }
-.hot .left-img,
-.hot .right-img {
-  transform: scale(0.8);
-  opacity: .7;
+.hot #wlittleyang-banner section.img-container article:first-child {
+  left: 25px;
 }
 .hot .action {
   position: absolute;
@@ -314,6 +296,7 @@ header .banner-header .action span:hover {
   margin: 5px;
   width: 50%;
   text-align: left;
+  background: none;
 }
 .hot .action-right {
   text-align: right;
@@ -326,12 +309,68 @@ header .banner-header .action span:hover {
 .hot .text_photo {
   width: 100%;
 }
-/**团队**/
+/**团队介绍**/
 .team {
   height: auto;
 }
 .team .banner {
-  height: 400px;
+  height: 300px;
+}
+.team .banner #wlittleyang-banner-five {
+  width: 540px;
+  height: 300px;
+  background: #cccccc;
+  margin: 150px auto;
+  position: relative;
+}
+.team .banner #wlittleyang-banner-five .container {
+  width: 540px;
+  height: 100%;
+  margin: 0 auto;
+  border: 1px solid seagreen;
+  position: relative;
+  overflow: hidden;
+}
+.team .banner #wlittleyang-banner-five .item {
+  background: #eeeeee;
+  border: 5px solid white;
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  text-align: center;
+  line-height: 200px;
+  font-size: 50px;
+}
+.team .banner #wlittleyang-banner-five .action {
+  position: absolute;
+  width: 540px;
+  display: flex;
+  justify-content: space-between;
+  height: 100%;
+  opacity: .2;
+  bottom: 0;
+  transition: opacity .5s;
+  z-index: 4;
+}
+.team .banner #wlittleyang-banner-five .action:hover {
+  opacity: 1;
+}
+.team .banner #wlittleyang-banner-five .action-right,
+.team .banner #wlittleyang-banner-five .action-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 5px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px;
+  width: 50%;
+  text-align: left;
+  background: none;
+}
+.team .banner #wlittleyang-banner-five .action-right {
+  text-align: right;
 }
 /**交通租赁**/
 .traffic {
@@ -558,6 +597,32 @@ footer .copyright {
   }
   .container .banner {
     width: 99%;
+  }
+  .hot #wlittleyang-banner {
+    width: 405px;
+  }
+  .hot #wlittleyang-banner section.img-container {
+    width: 405px;
+    border: none;
+  }
+  .hot #wlittleyang-banner section.img-container article {
+    width: 135px;
+  }
+  .hot #wlittleyang-banner section.img-container article:first-child {
+    left: 25px;
+  }
+  .hot .action {
+    width: 405px;
+  }
+  .team .banner #wlittleyang-banner-five {
+    width: 300px;
+  }
+  .team .banner #wlittleyang-banner-five .container {
+    width: 300px;
+    height: 200px;
+  }
+  .team .banner #wlittleyang-banner-five .action {
+    width: 300px;
   }
   .news li {
     width: 90%;

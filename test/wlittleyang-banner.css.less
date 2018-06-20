@@ -1,0 +1,62 @@
+*{
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body{
+  background: #cccccc;
+}
+@font-face {
+  font-family: testfont;
+  src: url("../font/HARRYP-1.ttf");
+}
+#wlittleyang-banner{
+  section.img-container{
+    border:1px solid red;
+    height: 300px;
+    width: auto;
+    margin: 0 auto;
+    position: relative;
+  }
+  section.img-container>article{
+    font-family: testfont;
+    height: 100%;
+    box-shadow: 0 0 5px seagreen;
+    line-height: 300px;
+    text-align: center;
+    font-size: 50px;
+    float: left;
+    background: white;
+    position: absolute;
+    transition: all .5s;
+  }
+  .banner{
+    margin: 0 auto;
+    border: 1px solid seagreen;
+    box-shadow: 0 0 15px rgba(0,0,0,.5);
+  }
+  .img-container article:nth-child(1){
+    //left: 50px;
+  }
+  .img-container article:nth-child(2){
+    /*left: 200px;*/
+    z-index: 1;
+    box-shadow: 0 0 15px 2px #333333;
+  }
+  .right-img{
+    /*left: 360px;*/
+  }
+  .img-container article:not(:nth-child(2)){
+    transform: scale(.8);
+  }
+}
+/*按钮控制器*/
+.action-right,.action-left{
+  padding: 5px;
+  background: seagreen;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  margin: 5px;
+  width: 50px;
+}

@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>五张图片的轮播</title>
+    <script src="../js/jquery/jquery-3.2.1.js"></script>
+    <style type="text/css">
+        body{background: #04b4dc}
+        *{padding: 0;margin: 0;box-sizing: border-box;}
+        #wlittleyang-banner-five{
+            width: 100%;
+            height: 300px;
+            background: #cccccc;
+            margin: 150px auto;
+        }
+        #wlittleyang-banner-five .container{
+            /*width: 75%;*/
+            height: 100%;
+            margin: 0 auto;
+            border: 1px solid seagreen;
+            position: relative;
+            overflow: hidden;
+        }
+        /*图片*/
+        #wlittleyang-banner-five .item{
+            background: #eeeeee;
+            border:5px solid white;
+            border-radius: 50%;
+            width: 200px;
+            height: 200px;
+            position: absolute;
+            text-align: center;
+            line-height: 200px;
+            font-size: 50px;
+        }
+
+        /*控制器*/
+        #wlittleyang-banner-five .action-left,.action-right{
+            margin: 15px;
+            display: inline-block;
+            padding: 5px;
+            font-size: 45px;
+            background: white;
+            cursor: pointer;
+        }
+
+        /*图片中间样式、位置*/
+        .center-img{
+
+        }
+    </style>
+</head>
+<body>
+    <div class="" id="wlittleyang-banner-five">
+        <div class="container">
+            <article class="item">1</article>
+            <article class="item">2</article>
+            <article class="item .center-img">3</article>
+            <article class="item">4</article>
+            <article class="item">5</article>
+        </div>
+        <aside class="action">
+            <span class="action-left">Left</span>
+            <span class="action-right">Right</span>
+        </aside>
+    </div>
+    <script>
+        $(function () {
+            //默认尺寸
+            //[160 , 180 , 200 , 180 , 160];
+            let initImageData = [
+                {
+                    size : 160,
+                    zIndex : 1,
+                    left : 0,
+                    top : 70
+                },
+                {
+                    size : 180,
+                    zIndex : 2,
+                    left : 160 / 2,
+                    top : 60
+                },
+                {
+                    size : 200,
+                    zIndex : 3,
+                    left :  180 / 2 + 160 / 2,
+                    top : 50
+                },
+                {
+                    size : 180,
+                    zIndex : 2,
+                    left : 200 + 180 / 2,
+                    top : 60
+                },
+                {
+                    size : 160,
+                    zIndex : 1,
+                    left : 200 + 180,
+                    top : 70
+                }
+            ];
+            //布局
+            let $imgContainer = $('#wlittleyang-banner-five .container');
+            let $img = $('#wlittleyang-banner-five .item');
+            let contaninerWidth =
+                initImageData[initImageData.length - 1].left + initImageData[initImageData.length - 1].size;
+            //容器宽度
+            $imgContainer.css('width' , contaninerWidth + 'px');
+            imgLayout();
+            function imgLayout() {
+                for (let i = 0; i < $img.length; i++) {
+                    let imgData = initImageData[i];
+                    //上下居中
+                    $($img[i]).css({
+                        left : imgData.left + 'px',
+                        height : imgData.size + 'px',
+                        width : imgData.size + 'px',
+                        zIndex : imgData.zIndex,
+                        top : imgData.top + 'px',
+                    });
+                }
+            };
+            //布局结束
+
+            //Action-开始
+            //Right
+            Right_action();
+            function Right_action() {
+                let left_action =  $('#wlittleyang-banner-five .action-right');
+                left_action.click(function () {
+                    $img.css({transition: 'all 1s'});
+                    {
+                        let temp = initImageData[0];
+                        for (let i = 0; i < $img.length - 1; i++) {
+                                //移位元数据
+                                initImageData[i] = initImageData[i+1];
+                        }
+                        initImageData[$img.length - 1] = temp;
+                    }
+                    //重新布局
+                    imgLayout();
+                });
+            }
+            //Left
+            Left_action();
+            function Left_action() {
+                let left_action =  $('#wlittleyang-banner-five .action-left');
+                left_action.click(function () {
+                    $img.css({transition: 'all 1s'});
+                    {
+                        let temp = initImageData[initImageData.length - 1];
+                        for (let i = initImageData.length - 1; i > 0; i--) {
+                            initImageData[i] = initImageData[i - 1];
+                        }
+                        initImageData[0] = temp;
+                    }
+                    //重新布局
+                    imgLayout();
+                });
+            }
+            //Action-结束
+        });
+    </script>
+</body>
+</html>
