@@ -118,9 +118,9 @@ $(document).ready(function () {
         class_nav.action.winResize();
         class_nav.action.menuBtn();
         //执行header的轮播
-        class_banner.action.autoPlay();
-        class_banner.action.actionListHover();
-        class_banner.action.containerHover();
+        // class_banner.action.autoPlay();
+        // class_banner.action.actionListHover();
+        // class_banner.action.containerHover();
         //执行热门景点banner
         /**执行轮播动画**/
         class_hot_banner.action.nextImg();
@@ -189,7 +189,6 @@ $(document).ready(function () {
     }
     //初始化第一个banner相关的成员变量以及相关属性
     function init_banner(){
-        //为了保证class_banner为最上文，使用开放式的function+闭包
         return  (function () {
             //第一个大轮播
             let $container = $('header .banner-header .container');
@@ -216,7 +215,7 @@ $(document).ready(function () {
             }
         })();
     }
-    //第一个轮播导航按钮控制  逐步淡入，统一淡出
+    //导航按钮控制  逐步淡入，统一淡出
     function navBtn() {
         let navBtn = class_nav.bean.domNode.menuBtn;
         let menuList = class_nav.bean.domNode.menuList;
@@ -238,21 +237,14 @@ $(document).ready(function () {
         });
     }
     //第一个大轮播，自动播放
+    // startPlay();
     function startPlay(){
         let imgList = class_banner.bean.domNode.$imgList;
+        imgList.first().show();
         let actionList = class_banner.bean.domNode.$actionList;
         let count = class_banner.bean.proprty.count;
-        class_banner.bean.proprty.timer = setInterval(function () {
-            imgList.not(imgList[count]).fadeOut(500);
-            $(imgList[count]).fadeIn(500);
-            actionList.css({background : 'none',opacity : '.8'});
-            $(actionList[count]).css({backgroundColor : 'white' , opacity : 1});
-            count++;
-            if (count === imgList.length){
-                count = 0;
-            }
-            class_banner.bean.proprty.count = count;
-        },2000);
+        $(imgList[0]).fadeOut(500);
+        $(imgList[1]).fadeIn(500);
     }
     //第一个轮播控制器控制轮播
     function actionListHover(){
@@ -282,7 +274,7 @@ $(document).ready(function () {
             startPlay();
         });
     }
-    //下一张 封装
+    //第二个轮播下一张 封装
     function next(){
         let $actionRight = class_hot_banner.bean.domNode.$actionRight;
         let actionTime = class_hot_banner.bean.proprty.animateTime;//保证动画与重新布局保持一致
@@ -319,7 +311,7 @@ $(document).ready(function () {
             },actionTime);
         });
     }
-    //上一张 封装
+    //第二个轮播上一张 封装
     function prev(){
         let $actionLeft = class_hot_banner.bean.domNode.$actionLeft;
         let actionTime = class_hot_banner.bean.proprty.animateTime;//保证动画与重新布局保持一致
@@ -482,7 +474,7 @@ $(document).ready(function () {
     }
     //布局结束
     //Action-开始
-    //Right
+    //第三个轮播Right
     function Right_action() {
         let $img = class_team_banner.bean.domNode.$img;
         let right_action =  $('#wlittleyang-banner-five .action-right');
@@ -501,7 +493,7 @@ $(document).ready(function () {
             imgLayout();
         });
     }
-    //Left
+    //第三个轮播Left
     function Left_action() {
         let left_action =  $('#wlittleyang-banner-five .action-left');
         let $img = class_team_banner.bean.domNode.$img;

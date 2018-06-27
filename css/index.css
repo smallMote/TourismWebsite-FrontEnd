@@ -146,7 +146,6 @@ header nav section .menu-btn a:hover span {
 }
 header .banner-header {
   height: 420px;
-  background: #333333;
   box-sizing: border-box;
   position: relative;
 }
@@ -167,6 +166,7 @@ header .banner-header .container article {
   height: 100%;
   opacity: 1;
   overflow: hidden;
+  transition: 1s all;
 }
 header .banner-header .container article img {
   width: 100%;

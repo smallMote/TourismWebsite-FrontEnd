@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>渐影轮播</title>
+    <script src="../js/jquery/jquery-3.2.1.js"></script>
+    <style type="text/css">
+        @font-face {
+            font-family: testfont;
+            src: url("../font/HARRYP-1.ttf");
+        }
+        *{box-sizing: border-box}
+        #wlittleyang-banner-fade{
+
+        }
+        #wlittleyang-banner-fade .container{
+            height: 300px;
+            overflow: hidden;
+            border: 1px solid seagreen;
+            position: relative;
+        }
+        #wlittleyang-banner-fade .item{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            text-align: center;
+            font-size: 50px;
+            line-height: 300px;
+            font-family: testfont;
+            transition: all 2s;
+            opacity: 0;
+            cursor: pointer;
+        }
+        #wlittleyang-banner-fade .item:first-child{
+            opacity: 1;
+        }
+        #wlittleyang-banner-fade .item img{
+            width: 100%;
+        }
+        #wlittleyang-banner-fade .action-btn span{
+            display: inline-block;
+            padding: 5px;
+            margin: 15px;
+            background: seagreen;
+            border-radius: 4px;
+            width: 100px;
+            text-align: center;
+            cursor: pointer;
+        }
+        #wlittleyang-banner-fade .action-hover{
+            width: 100px;
+            display: flex;
+            justify-content: space-between;
+        }
+        #wlittleyang-banner-fade .action-hover-item{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            border: 1px solid seagreen;
+            display: block;
+            transition: 1s all  ;
+        }
+        #wlittleyang-banner-fade .action-hover-item:hover{
+            cursor: pointer;
+            background: seagreen;
+        }
+    </style>
+</head>
+<body>
+<section id="wlittleyang-banner-fade">
+    <div class="container">
+        <article class="item">
+            <img src="../imgs/banner/_wel/wel-bg1.jpg" alt="">
+        </article>
+        <article class="item">
+            <img src="../imgs/banner/_wel/wel-bg2.jpg" alt="">
+        </article>
+        <article class="item">
+            <img src="../imgs/banner/_wel/wel-bg3.jpg" alt="">
+        </article>
+    </div>
+    <section class="action-btn">
+        <span class="action-left">Left</span>
+        <span class="action-right">Right</span>
+    </section>
+    <section class="action-hover"></section>
+</section>
+    <script type="text/javascript">
+        $(function () {
+            const banner_fade = (function () {
+
+            })();
+            function init_banner_fade() {
+                let $hoverAction;
+                //创建hover指示器
+                for (let i = 0; i < item.length; i++) {
+                    $hoverAction = $('<span>');
+                    $hoverAction.addClass('action-hover-item');
+                    $('#wlittleyang-banner-fade .action-hover').append($hoverAction);
+                }
+                let item = $('#wlittleyang-banner-fade .item');
+                return {
+                    item : item,
+                    timer : setInterval(function () {
+                        $('.action-right').click();
+                    },2000),
+                    hoverAction : function(){
+                        item.hover(function () {
+                            clearInterval(timer);
+                        },function () {
+                            timer = setInterval(function () {
+                                $('.action-right').click();
+                            },2000);
+                        });
+                    },
+                    proprty : {
+                        count : 0
+                    }
+                }
+            }
+            let count = 0;
+            let item = $('#wlittleyang-banner-fade .item');
+            let $hoverAction;
+            //创建hover指示器
+            for (let i = 0; i < item.length; i++) {
+                $hoverAction = $('<span>');
+                $hoverAction.addClass('action-hover-item');
+                $('#wlittleyang-banner-fade .action-hover').append($hoverAction);
+            }
+            $('.action-right').click(function () {
+                if (count === item.length - 1) {
+                    count = 0;
+                    $(item[item.length - 1]).css({opacity : 0});
+                    $(item[0]).css({opacity : 1});
+                }else {
+                    $(item[count]).css({opacity : 0});
+                    $(item[count + 1]).css({opacity : 1});
+                    count += 1;
+                }
+            });
+            //自动轮播，模拟用户操作
+            let timer = setInterval(function () {
+                $('.action-right').click();
+            },2000);
+            //图片的抚摸，抚摸在上方时暂停自动播放，溢出抚摸开始自动播放
+            item.hover(function () {
+                clearInterval(timer);
+            },function () {
+                timer = setInterval(function () {
+                    $('.action-right').click();
+                },2000);
+            });
+            //指示器的抚摸事件处理
+            $('.action-hover .action-hover-item').hover(function () {
+                clearInterval(timer);
+                //获取当前的索引
+                let now_i = $(this).index();
+                console.log(now_i);
+                    item.css({opacity : 0});
+                    $(item[now_i]).css({opacity : 1});
+            },function () {
+                timer = setInterval(function () {
+                    $('.action-right').click();
+                },2000);
+            });
+        });
+    </script>
+</body>
+</html>

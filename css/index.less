@@ -153,12 +153,15 @@ header{
   .banner-header{
     *{box-sizing: border-box}
     height: @this_height - @nav_height;
-    background: #333333;
+    //background: #333333;
     box-sizing: border-box;
     position: relative;
     .container{
       height: 100%;
       position: relative;
+      .showMaxBanner{
+
+      }
       article{
         position: absolute;
         font-size: 100px;
@@ -169,6 +172,7 @@ header{
         height: 100%;
         opacity: 1;
         overflow: hidden;
+        transition: 1s all;
         img{
           width: 100%;
         }
